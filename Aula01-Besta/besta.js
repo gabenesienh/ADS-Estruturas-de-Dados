@@ -16,41 +16,46 @@
 
 const QTD_FLECHAS_A_DISPARAR = 16;
 
-function disparaComABesta(qtdFlechas) {
-    let qtdFlechasInicial = qtdFlechas;
-    let qtdAcertos = 0;
-    let qtdErros = 0;
+function disparaComABesta({ qtdFlechas }) {
+  let qtdFlechasInicial = qtdFlechas;
+  let qtdFlechasAtual = qtdFlechas;
+  let qtdAcertos = 0;
+  let qtdErros = 0;
 
-    return () => {
-        if (qtdFlechas > 0) {
-            if (Math.random() < 0.6) {
-                qtdErros++;
-                console.log('Errou!');
-            } else {
-                qtdAcertos++;
-                console.log('Acertou!');
-            }
+  return () => {
+    if (qtdFlechasAtual <= 0) {
+      console.log(
+        "Sem flechas!" +
+          "\n----------" +
+          `\nTotal de disparos: ${qtdFlechasInicial}` +
+          `\nAcertos: ${qtdAcertos}` +
+          `\nErros: ${qtdErros}`
+      );
 
-            qtdFlechas--;
-
-            // Exibir quantas flechas restam
-            console.log(`Flechas: ${qtdFlechas}/${qtdFlechasInicial}`);
-        } else {
-            console.log(
-                    'Sem flechas!'
-                + '\n----------'
-                + `\nTotal de disparos: ${qtdFlechasInicial}`
-                + `\nAcertos: ${qtdAcertos}`
-                + `\nErros: ${qtdErros}`
-            );
-        }
+      return;
     }
+
+    const flechaErrou = Math.random() < 0.6;
+
+    if (flechaErrou) {
+      qtdErros++;
+      console.log("Errou!");
+    } else {
+      qtdAcertos++;
+      console.log("Acertou!");
+    }
+
+    qtdFlechasAtual--;
+
+    // Exibir quantas flechas restam
+    console.log(`Flechas: ${qtdFlechasAtual}/${qtdFlechasInicial}`);
+  };
 }
 
-let disparador = disparaComABesta(QTD_FLECHAS_A_DISPARAR);
+const disparador = disparaComABesta({ qtdFlechas: QTD_FLECHAS_A_DISPARAR });
 
 // Disparar até não houver mais flechas, então tentar disparar novamente
 for (let i = 0; i <= QTD_FLECHAS_A_DISPARAR; i++) {
-    console.log(); //separar resultados com quebra de linha
-    disparador();
+  console.log(); //separar resultados com quebra de linha
+  disparador();
 }
