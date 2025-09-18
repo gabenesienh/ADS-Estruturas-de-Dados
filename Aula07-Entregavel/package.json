@@ -1,0 +1,13 @@
+{
+  "name": "linked-stream",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "scripts": {
+    "playground": "node playground.js",
+    "server": "node server.js",
+    "client": "node client.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
