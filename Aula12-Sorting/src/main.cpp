@@ -1,13 +1,13 @@
 // Bubble e insertion sorts
 
-#include <iostream>
-#include <vector>
 #include <chrono>
+#include <iostream>
 #include <random>
+#include <vector>
 
 using std::cout;
-using std::vector;
 using std::mt19937, std::random_device;
+using std::vector;
 
 mt19937 rng = mt19937(std::random_device{}());
 
